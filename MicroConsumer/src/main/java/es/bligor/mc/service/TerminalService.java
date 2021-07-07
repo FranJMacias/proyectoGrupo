@@ -53,4 +53,13 @@ public class TerminalService implements ICrudService<Terminal> {
 		return restTemplate.getForObject(url + "/findById/{id}", Terminal.class, id);
 	}
 
+	public List<Terminal> getByNombre(String nombre) {
+		return Arrays.asList(restTemplate.getForObject(url + "/filtroNombre/{nombre}", Terminal[].class, nombre));
+	}
+
+	public List<Terminal> getByPuertas(int minPuertas, int maxPuertas) {
+		String url2 = url + "/filtroPuertas/" + minPuertas + "/" + maxPuertas;
+		return Arrays.asList(restTemplate.getForObject(url2, Terminal[].class));
+	}
+
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +69,21 @@ public class TerminalService implements ITerminalService {
 			terminalRepository.delete(t);
 			return "ok";
 		}
+	}
+
+	@Override
+	public List<TerminalDto> findByNombre(String nombre) {
+		List<TerminalDto> lista = Convertidor.listTerminalEntityToDto(terminalRepository.findAll());
+		lista = lista.stream().filter(t -> t.getNombre().matches(".*" + nombre + ".*")).collect(Collectors.toList());
+		return lista;
+	}
+
+	@Override
+	public List<TerminalDto> findByNumeroPuertas(int puertasMin, int puertasMax) {
+		List<TerminalDto> lista = Convertidor.listTerminalEntityToDto(terminalRepository.findAll());
+		lista = lista.stream().filter(t -> t.getNumeroPuertas() > puertasMin && t.getNumeroPuertas() < puertasMax)
+				.collect(Collectors.toList());
+		return lista;
 	}
 
 }

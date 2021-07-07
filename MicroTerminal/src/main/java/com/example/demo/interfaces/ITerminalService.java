@@ -15,4 +15,8 @@ public interface ITerminalService {
 	public String editarTerminal(TerminalDto t);
 
 	public String deleteById(int id);
+
+	public List<TerminalDto> findByNombre(String nombre);
+
+	public List<TerminalDto> findByNumeroPuertas(int puertasMin, int puertasMax);
 }

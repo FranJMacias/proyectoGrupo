@@ -63,4 +63,16 @@ public class Controlador {
 			return new ResponseEntity<>("No existe", HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	@GetMapping("/filtroNombre/{nombre}")
+	public ResponseEntity<List<TerminalDto>> findByNombre(@PathVariable("nombre") String nombre) {
+		return new ResponseEntity<List<TerminalDto>>(terminalService.findByNombre(nombre), HttpStatus.OK);
+	}
+
+	@GetMapping("/filtroPuertas/{minPuertas}/{maxPuertas}")
+	public ResponseEntity<List<TerminalDto>> findByPuertas(@PathVariable("minPuertas") Integer minPuertas,
+			@PathVariable("maxPuertas") Integer maxPuertas) {
+		return new ResponseEntity<List<TerminalDto>>(terminalService.findByNumeroPuertas(minPuertas, maxPuertas),
+				HttpStatus.OK);
+	}
 }
