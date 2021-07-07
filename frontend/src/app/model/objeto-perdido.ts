@@ -1,5 +1,5 @@
 export class ObjetoPerdido {
-    id: any;
+    idObjeto: any;
     fecha: Date | any;
-    nombreObjeto: any;
+    nombre: any;
 }

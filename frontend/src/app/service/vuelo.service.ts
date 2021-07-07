@@ -17,10 +17,10 @@ export class VueloService {
     return this.http.post<Vuelo>(this.url, vuelo);
   }
   public update(vuelo: Vuelo) {
-    this.http.put<Vuelo>(this.url, vuelo);
+    return this.http.put<Vuelo>(this.url, vuelo);
   }
   public delete(id: number) {
-    this.http.delete<Vuelo>(this.url + '/' + id);
+    return this.http.delete<Vuelo>(this.url + '/' + id);
   }
   public getAll(): Observable<Vuelo[]> {
     return this.http.get<Vuelo[]>(this.url + 's');

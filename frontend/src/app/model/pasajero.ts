@@ -1,6 +1,6 @@
 export class Pasajero {
-  id: any;
-  idVuelo: any;
+  id_pasajero: any;
+  id_vuelo: any;
   nombre: any;
   nif: any;
   telefono: any;

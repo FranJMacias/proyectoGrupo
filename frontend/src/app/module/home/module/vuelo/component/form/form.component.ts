@@ -17,27 +17,45 @@ export class FormComponent implements OnInit {
   form: FormControl = new FormControl();
   terminales: Terminal[] = [];
   vueloFinal: Vuelo;
+    update: boolean = false;
 
   constructor(private vueloService: VueloService,
     private terminalService: TerminalService,
     private router: Router,
     private route: ActivatedRoute) {
-    this.vueloFinal = new Vuelo();
-   }
+    if (history.state.id_vuelo == null) {
+      this.vueloFinal = new Vuelo();
+    } else {
+
+      this.update = true;
+      this.vueloFinal = history.state;
+      this.form.setValue(this.vueloFinal.id_terminal);
+      console.log(this.vueloFinal)
+    }
+  }
 
   ngOnInit(): void {
     this.getTerminales();
   }
 
-  submit(){
-    this.vueloFinal.idTerminal = this.form.value.idTerminal;
-    this.vueloService.add(this.vueloFinal).subscribe(res =>{
+  submit() {
+    console.log(this.vueloFinal)
+    this.vueloFinal.id_terminal = this.form.value;
+    if(!this.update){
+      console.log("no update")
+    this.vueloService.add(this.vueloFinal).subscribe(res => {
+      console.log(res);
+      this.router.navigate(['/home/vuelo/lista']);
+    });
+  } else {
+    this.vueloService.update(this.vueloFinal).subscribe(res => {
       console.log(res);
       this.router.navigate(['/home/vuelo/lista']);
     });
   }
+  }
 
-  getTerminales(){
+  getTerminales() {
     this.terminalService.getAll().subscribe(res => {
       this.terminales = res;
     })

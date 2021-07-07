@@ -35,4 +35,8 @@ export class ListComponent implements OnInit {
     this.terminalService.delete(id).subscribe();
     this.getTerminales();
   }
+
+  edit(terminal: Terminal){
+    this.router.navigateByUrl('/home/terminal/form', { state: terminal });
+  }
 }

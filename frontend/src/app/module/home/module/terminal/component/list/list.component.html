@@ -24,7 +24,7 @@
       <button type="button" class="btn btn-primary" routerLink="/home/terminal/form"> + </button>
     </th>
     <td mat-cell *matCellDef="let terminal">
-      <button type="button" class="btn btn-primary"> Edit </button>
+      <button type="button" class="btn btn-primary" (click)="edit(terminal)"> Edit </button>
     </td>
   </ng-container>
 

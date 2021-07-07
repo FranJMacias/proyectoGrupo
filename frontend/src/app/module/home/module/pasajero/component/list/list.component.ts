@@ -28,4 +28,12 @@ export class ListComponent implements OnInit {
       this.pasajeros = result;
     })
   }
+
+  delete(id: number){
+    this.pasajeroService.delete(id).subscribe(res=>this.getPasajeros());
+  }
+
+  edit(pasajero: Pasajero){
+    this.router.navigateByUrl('/home/pasajero/form', { state: pasajero });
+  }
 }

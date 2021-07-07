@@ -16,26 +16,40 @@ export class FormComponent implements OnInit {
 
   form: FormControl = new FormControl();
   terminalFinal: Terminal;
+  update: boolean = false;
 
   constructor(private terminalService: TerminalService,
     private router: Router,
     private route: ActivatedRoute) {
-    this.terminalFinal = new Terminal();
-    this.terminalFinal.objetosPerdidos = [];
+    if (history.state.idTerminal == null) {
+      this.terminalFinal = new Terminal();
+      this.terminalFinal.objetosPerdidos = [];
+    } else {
+      console.log(history.state)
+      this.update = true;
+      this.terminalFinal = history.state;
+    }
   }
 
   ngOnInit(): void {
   }
 
-  submit(){
+  submit() {
     console.log(this.terminalFinal)
-    this.terminalService.add(this.terminalFinal).subscribe(res =>{
-      console.log(res);
-      this.router.navigate(['home/terminal/lista']);
-    });
+    if (!this.update) {
+      this.terminalService.add(this.terminalFinal).subscribe(res => {
+        console.log(res);
+        this.router.navigate(['home/terminal/lista']);
+      });
+    } else {
+      this.terminalService.update(this.terminalFinal).subscribe(res => {
+        console.log(res);
+        this.router.navigate(['/home/terminal/lista']);
+      });
+    }
   }
 
-  addObjetoPerdido(){
+  addObjetoPerdido() {
     this.terminalFinal.objetosPerdidos.push(new ObjetoPerdido());
   }
 }

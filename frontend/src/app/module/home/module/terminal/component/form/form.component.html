@@ -21,6 +21,11 @@
   </div>
   <div *ngFor="let objeto of terminalFinal.objetosPerdidos">
     <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Id</label>
+      <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Id"
+        [(ngModel)]="objeto.idObjeto">
+    </div>
+    <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label"> Fecha</label>
       <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Fecha"
         [(ngModel)]="objeto.fecha">
@@ -28,7 +33,7 @@
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Nombre Objeto</label>
       <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre"
-        [(ngModel)]="objeto.nombreObjeto">
+        [(ngModel)]="objeto.nombre">
     </div>
   </div>
   <div class="mb-3">

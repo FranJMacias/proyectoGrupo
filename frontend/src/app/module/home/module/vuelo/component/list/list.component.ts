@@ -13,21 +13,30 @@ import { VueloModule } from '../../vuelo.module';
 })
 export class ListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'idTerminal', 'compania', 'fecha', 'destino', 'origen', 'duracion','add', 'delete'];
+  displayedColumns: string[] = ['id', 'idTerminal', 'compania', 'fecha', 'destino', 'origen', 'duracion', 'add', 'delete'];
   vuelos: Vuelo[] = [];
 
   constructor(private vueloService: VueloService,
     private router: Router,
     private route: ActivatedRoute) {
-   }
+  }
 
   ngOnInit(): void {
     this.getVuelos();
   }
 
-  getVuelos(){
-    this.vueloService.getAll().subscribe(result =>{
+  getVuelos() {
+    this.vueloService.getAll().subscribe(result => {
+      console.log(result)
       this.vuelos = result;
     })
+  }
+
+  delete(id: number) {
+    this.vueloService.delete(id).subscribe(res => this.getVuelos());
+  }
+
+  edit(vuelo: Vuelo){
+    this.router.navigateByUrl('/home/vuelo/form', { state: vuelo });
   }
 }

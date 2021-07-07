@@ -1,8 +1,8 @@
 export class Vuelo {
-    id: any;
-    idTerminal: any;
+    id_vuelo: any;
+    id_terminal: any;
     compania: any;
-    fecha: Date | any;
+    fechaHora: Date | any;
     destino: any;
     origen: any;
     duracion: any;
