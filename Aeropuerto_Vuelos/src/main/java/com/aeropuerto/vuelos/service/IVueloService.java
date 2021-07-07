@@ -15,4 +15,6 @@ public interface IVueloService {
 	
 	List<Vuelo_DTO> findVuelosByTerminal(int id_terminal);
 	
+	List<Vuelo_DTO> findVuelosByCompania(String compania);
+	
 }

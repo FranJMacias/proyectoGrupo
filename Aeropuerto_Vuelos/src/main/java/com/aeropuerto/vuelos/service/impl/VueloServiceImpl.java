@@ -42,4 +42,9 @@ public class VueloServiceImpl implements IVueloService {
 		return Converter.convertirLista(vueloRepository.findAll().stream().filter(v->v.getId_terminal() == id_terminal).collect(Collectors.toList()));
 	}
 
+	@Override
+	public List<Vuelo_DTO> findVuelosByCompania(String compania) {
+		return Converter.convertirLista(vueloRepository.findAll().stream().filter(v->v.getCompania().equals(compania)).collect(Collectors.toList()));
+	}
+
 }
