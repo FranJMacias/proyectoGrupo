@@ -44,7 +44,17 @@ public class VueloServiceImpl implements IVueloService {
 
 	@Override
 	public List<Vuelo_DTO> findVuelosByCompania(String compania) {
-		return Converter.convertirLista(vueloRepository.findAll().stream().filter(v->v.getCompania().equals(compania)).collect(Collectors.toList()));
+		return Converter.convertirLista(vueloRepository.findAll().stream().filter(v->v.getCompania().equalsIgnoreCase(compania)).collect(Collectors.toList()));
+	}
+
+	@Override
+	public List<Vuelo_DTO> findVuelosByOrigen(String origen) {
+		return Converter.convertirLista(vueloRepository.findAll().stream().filter(v->v.getOrigen().equalsIgnoreCase(origen)).collect(Collectors.toList()));
+	}
+
+	@Override
+	public List<Vuelo_DTO> findVuelosByDestino(String destino) {
+		return Converter.convertirLista(vueloRepository.findAll().stream().filter(v->v.getDestino().equalsIgnoreCase(destino)).collect(Collectors.toList()));
 	}
 
 }

@@ -69,5 +69,15 @@ public class Controller {
 	public ResponseEntity<List<Vuelo_DTO>> getVuelosByCompania(@PathVariable("compania") String compania) {
 		return new ResponseEntity<List<Vuelo_DTO>>(vueloService.findVuelosByCompania(compania), HttpStatus.OK);
 	}
+	
+	@GetMapping("/vuelos/origen/{origen}")
+	public ResponseEntity<List<Vuelo_DTO>> getVuelosByOrigen(@PathVariable("origen") String origen) {
+		return new ResponseEntity<List<Vuelo_DTO>>(vueloService.findVuelosByOrigen(origen), HttpStatus.OK);
+	}
+	
+	@GetMapping("/vuelos/destino/{destino}")
+	public ResponseEntity<List<Vuelo_DTO>> getVuelosByDestino(@PathVariable("destino") String destino) {
+		return new ResponseEntity<List<Vuelo_DTO>>(vueloService.findVuelosByDestino(destino), HttpStatus.OK);
+	}
 
 }
