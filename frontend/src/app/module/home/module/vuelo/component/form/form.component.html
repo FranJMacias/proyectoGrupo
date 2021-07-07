@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Terminal</label>
+    <mat-form-field appearance="fill">
+      <mat-label>Terminal</mat-label>
+      <mat-select [formControl]="form">
+        <mat-option *ngFor="let terminal of terminales" [value]="terminal.idTerminal">
+          {{terminal.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Compañia</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Compañia" [(ngModel)]="vueloFinal.compania">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+    <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Fecha" [(ngModel)]="vueloFinal.fecha">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Destino</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Destino" [(ngModel)]="vueloFinal.destino">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Origen</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Origen" [(ngModel)]="vueloFinal.origen">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Duracion</label>
+    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Duracion" [(ngModel)]="vueloFinal.duracion">
+  </div>
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+  </div>
+</div>

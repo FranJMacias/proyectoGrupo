@@ -1,0 +1,64 @@
+<table mat-table [dataSource]="vuelos" class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="idTerminal">
+    <th mat-header-cell *matHeaderCellDef> Id Terminal </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.idTerminal}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="compania">
+    <th mat-header-cell *matHeaderCellDef> Compañia </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.compania}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.fecha}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="destino">
+    <th mat-header-cell *matHeaderCellDef> Destino </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.destino}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="origen">
+    <th mat-header-cell *matHeaderCellDef> Origen </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.origen}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="duracion">
+    <th mat-header-cell *matHeaderCellDef> Duracion </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.duracion}} </td>
+  </ng-container>
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="add">
+    <th mat-header-cell *matHeaderCellDef>
+      <button type="button" class="btn btn-primary" routerLink="/home/vuelo/form"> + </button>
+    </th>
+    <td mat-cell *matCellDef="let pasajero">
+      <button type="button" class="btn btn-primary"> Edit </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>
+    </th>
+    <td mat-cell *matCellDef="let pasajero">
+      <button type="button" class="btn btn-danger"> Delete </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Proyecto Aeropuerto';
+  list = [
+    "Vuelo",
+    "Terminal",
+    "Pasajero"
+  ]
+  showFiller = false;
+
+  constructor() { }
 }
