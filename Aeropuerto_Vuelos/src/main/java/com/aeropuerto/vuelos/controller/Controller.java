@@ -34,18 +34,31 @@ public class Controller {
 	
 	@PostMapping("/vuelo")
 	public ResponseEntity<Vuelo_DTO> postVuelo(@RequestBody Vuelo_DTO vuelo_dto){
-		return new ResponseEntity<Vuelo_DTO>(vueloService.saveVuelo(vuelo_dto), HttpStatus.CREATED);
+		if (vueloService.findVueloById(vuelo_dto.getId_vuelo()) == null) {
+			return new ResponseEntity<Vuelo_DTO>(vueloService.saveVuelo(vuelo_dto), HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<Vuelo_DTO>(new Vuelo_DTO(), HttpStatus.FOUND);
+		}
 	}
 	
 	@PutMapping("/vuelo")
 	public ResponseEntity<Vuelo_DTO> putVuelo(@RequestBody Vuelo_DTO vuelo_dto){
-		return new ResponseEntity<Vuelo_DTO>(vueloService.saveVuelo(vuelo_dto), HttpStatus.OK);
+		if (vueloService.findVueloById(vuelo_dto.getId_vuelo()) != null) {
+			return new ResponseEntity<Vuelo_DTO>(vueloService.saveVuelo(vuelo_dto), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Vuelo_DTO>(new Vuelo_DTO(), HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@DeleteMapping("/vuelo/{id}")
 	public ResponseEntity deleteVuelo(@PathVariable("id") int id){
 		vueloService.deleteVuelo(id);
 		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@GetMapping("/vuelos/terminal/{id}")
+	public ResponseEntity<List<Vuelo_DTO>> getVuelosByIdTerminal(@PathVariable("id") int id){
+		return new ResponseEntity<List<Vuelo_DTO>>(vueloService.findVuelosByTerminal(id), HttpStatus.OK);
 	}
 	
 }

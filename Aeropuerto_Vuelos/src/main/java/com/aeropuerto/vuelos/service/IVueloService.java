@@ -13,4 +13,6 @@ public interface IVueloService {
 
 	void deleteVuelo(int id);
 	
+	List<Vuelo_DTO> findVuelosByTerminal(int id_terminal);
+	
 }

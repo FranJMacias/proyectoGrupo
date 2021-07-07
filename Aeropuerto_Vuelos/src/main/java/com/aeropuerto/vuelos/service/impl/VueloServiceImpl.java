@@ -1,6 +1,7 @@
 package com.aeropuerto.vuelos.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,11 @@ public class VueloServiceImpl implements IVueloService {
 	@Override
 	public void deleteVuelo(int id) {
 		vueloRepository.deleteById(id);		
+	}
+
+	@Override
+	public List<Vuelo_DTO> findVuelosByTerminal(int id_terminal) {
+		return Converter.convertirLista(vueloRepository.findAll().stream().filter(v->v.getId_terminal() == id_terminal).collect(Collectors.toList()));
 	}
 
 }
