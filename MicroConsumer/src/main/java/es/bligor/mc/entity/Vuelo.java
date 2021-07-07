@@ -11,16 +11,20 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+<<<<<<< HEAD
 @JsonRootName("Vuelo")
+=======
+@JsonRootName("Vuelo_DTO")
+>>>>>>> feat-vuelos-David
 public class Vuelo {
 	
-	private Integer id;
+	private Integer id_vuelo;
 
-	private Integer idTerminal;
+	private Integer id_terminal;
 
-	private String compañia;
+	private String compania;
 
-	private Date fecha;
+	private Date fechaHora;
 
 	private String destino;
 
