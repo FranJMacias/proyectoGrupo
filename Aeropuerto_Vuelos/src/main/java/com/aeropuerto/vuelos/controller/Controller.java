@@ -21,49 +21,53 @@ public class Controller {
 
 	@Autowired
 	private IVueloService vueloService;
-	
+
 	@GetMapping("/vuelos")
-	public ResponseEntity<List<Vuelo_DTO>> getAllVuelos(){
+	public ResponseEntity<List<Vuelo_DTO>> getAllVuelos() {
 		return new ResponseEntity<List<Vuelo_DTO>>(vueloService.getAllVuelos(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/vuelo/{id}")
-	public ResponseEntity<Vuelo_DTO> getVuelo(@PathVariable("id") int id){
+	public ResponseEntity<Vuelo_DTO> getVuelo(@PathVariable("id") int id) {
 		return new ResponseEntity<Vuelo_DTO>(vueloService.findVueloById(id), HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/vuelo")
-	public ResponseEntity<Vuelo_DTO> postVuelo(@RequestBody Vuelo_DTO vuelo_dto){
-		if (vueloService.findVueloById(vuelo_dto.getId_vuelo()) == null) {
-			return new ResponseEntity<Vuelo_DTO>(vueloService.saveVuelo(vuelo_dto), HttpStatus.CREATED);
-		} else {
+	public ResponseEntity<Vuelo_DTO> postVuelo(@RequestBody Vuelo_DTO vuelo_dto) {
+		try {
+			vueloService.findVueloById(vuelo_dto.getId_vuelo());
 			return new ResponseEntity<Vuelo_DTO>(new Vuelo_DTO(), HttpStatus.FOUND);
+
+		} catch (NullPointerException e) {
+			return new ResponseEntity<Vuelo_DTO>(vueloService.saveVuelo(vuelo_dto), HttpStatus.CREATED);
 		}
 	}
-	
+
 	@PutMapping("/vuelo")
-	public ResponseEntity<Vuelo_DTO> putVuelo(@RequestBody Vuelo_DTO vuelo_dto){
-		if (vueloService.findVueloById(vuelo_dto.getId_vuelo()) != null) {
+	public ResponseEntity<Vuelo_DTO> putVuelo(@RequestBody Vuelo_DTO vuelo_dto) {
+		try {
+			vueloService.findVueloById(vuelo_dto.getId_vuelo());
 			return new ResponseEntity<Vuelo_DTO>(vueloService.saveVuelo(vuelo_dto), HttpStatus.OK);
-		} else {
+
+		} catch (NullPointerException e) {
 			return new ResponseEntity<Vuelo_DTO>(new Vuelo_DTO(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@DeleteMapping("/vuelo/{id}")
-	public ResponseEntity deleteVuelo(@PathVariable("id") int id){
+	public ResponseEntity deleteVuelo(@PathVariable("id") int id) {
 		vueloService.deleteVuelo(id);
 		return new ResponseEntity(HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/vuelos/terminal/{id}")
-	public ResponseEntity<List<Vuelo_DTO>> getVuelosByIdTerminal(@PathVariable("id") int id){
+	public ResponseEntity<List<Vuelo_DTO>> getVuelosByIdTerminal(@PathVariable("id") int id) {
 		return new ResponseEntity<List<Vuelo_DTO>>(vueloService.findVuelosByTerminal(id), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/vuelos/compania/{compania}")
-	public ResponseEntity<List<Vuelo_DTO>> getVuelosByCompania(@PathVariable("compania") String compania){
+	public ResponseEntity<List<Vuelo_DTO>> getVuelosByCompania(@PathVariable("compania") String compania) {
 		return new ResponseEntity<List<Vuelo_DTO>>(vueloService.findVuelosByCompania(compania), HttpStatus.OK);
 	}
-	
+
 }
