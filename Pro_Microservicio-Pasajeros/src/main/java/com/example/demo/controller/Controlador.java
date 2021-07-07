@@ -36,19 +36,23 @@ public class Controlador {
 
 	@PostMapping("/crear_pasajero")
 	public ResponseEntity<Pasajero_DTO> get_crear_pasajero(@RequestBody Pasajero_DTO pasajero_DTO) {
-		if (ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero()) == null) {
+		try {
+			ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero());
+			return new ResponseEntity<Pasajero_DTO>( new Pasajero_DTO(), HttpStatus.FOUND);
+
+		} catch (NullPointerException e) {
 			return new ResponseEntity<Pasajero_DTO>(ipasajeros.savePasajero(pasajero_DTO), HttpStatus.CREATED);
-		} else {
-			return new ResponseEntity<Pasajero_DTO>(new Pasajero_DTO(), HttpStatus.FOUND);
 		}
 	}
 
 	@PutMapping("/actualizar_pasajero")
 	public ResponseEntity<Pasajero_DTO> get_actualizar_pasajero(@RequestBody Pasajero_DTO pasajero_DTO) {
-		if (ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero()) == null) {
+		try {
+			ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero());
 			return new ResponseEntity<Pasajero_DTO>(ipasajeros.savePasajero(pasajero_DTO), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Pasajero_DTO>(new Pasajero_DTO(), HttpStatus.FOUND);
+
+		} catch (NullPointerException e) {
+			return new ResponseEntity<Pasajero_DTO>( new Pasajero_DTO(), HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -58,4 +62,9 @@ public class Controlador {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
+	
+	@GetMapping("/obtener_pasajero_nif/{nif}")
+	public ResponseEntity<Pasajero_DTO> getPasajeroByNif(@PathVariable("nif") String nif) {
+		return new ResponseEntity<Pasajero_DTO>(ipasajeros.findPasajeroByNif(nif), HttpStatus.OK);
+	}
 }

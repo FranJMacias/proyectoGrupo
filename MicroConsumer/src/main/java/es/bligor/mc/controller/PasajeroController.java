@@ -54,4 +54,9 @@ public class PasajeroController implements ICrudController<Pasajero> {
 	public ResponseEntity<Pasajero> getById(@PathVariable("id") String id) {
 		return new ResponseEntity<Pasajero>(pasajeroService.getById(id), HttpStatus.OK);
 	}
+
+	@GetMapping("/pasajero/nif/{nif}")
+	public ResponseEntity<Pasajero> getPasajeroByNif(@PathVariable("nif") String nif) {
+		return new ResponseEntity<Pasajero>(pasajeroService.getByNif(nif), HttpStatus.OK);
+	}
 }
