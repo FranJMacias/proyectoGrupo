@@ -19,20 +19,19 @@ public class VueloService {
 	private RestTemplate restTemplate;
 
 	private String url = "http://micro-vuelos";
-	
+
 	private HttpHeaders headers = new HttpHeaders();
-	
 
 	public Vuelo add(Vuelo vuelo) {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<Vuelo> request = new HttpEntity<>(vuelo, headers);
-		return restTemplate.postForObject(url + "/vuelo", vuelo, Vuelo.class);
+		return restTemplate.postForObject(url + "/vuelo", request, Vuelo.class);
 	}
 
 	public void update(Vuelo vuelo) {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<Vuelo> request = new HttpEntity<>(vuelo, headers);
-		restTemplate.put(url + "/vuelo", vuelo);
+		restTemplate.put(url + "/vuelo", request);
 	}
 
 	public void delete(int id) {
@@ -46,19 +45,19 @@ public class VueloService {
 	public Vuelo getById(int id) {
 		return restTemplate.getForObject(url + "/vuelo/" + id, Vuelo.class);
 	}
-	
+
 	public List<Vuelo> getByTerminal(int id_terminal) {
 		return Arrays.asList(restTemplate.getForObject(url + "/vuelos/terminal/" + id_terminal, Vuelo[].class));
 	}
-	
+
 	public List<Vuelo> getByCompania(String compania) {
 		return Arrays.asList(restTemplate.getForObject(url + "/vuelos/compania/" + compania, Vuelo[].class));
 	}
-	
+
 	public List<Vuelo> getByOrigen(String origen) {
 		return Arrays.asList(restTemplate.getForObject(url + "/vuelos/origen/" + origen, Vuelo[].class));
 	}
-	
+
 	public List<Vuelo> getByDestino(String destino) {
 		return Arrays.asList(restTemplate.getForObject(url + "/vuelos/destino/" + destino, Vuelo[].class));
 	}
