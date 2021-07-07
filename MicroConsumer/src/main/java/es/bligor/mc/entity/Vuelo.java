@@ -2,6 +2,8 @@ package es.bligor.mc.entity;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonRootName("Vuelo")
 public class Vuelo {
 	
 	private Integer id;
