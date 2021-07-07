@@ -39,7 +39,7 @@ public class VueloController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
-	@GetMapping("/vuelo")
+	@GetMapping("/vuelos")
 	public ResponseEntity<List<Vuelo>> getAll() {
 		return new ResponseEntity<List<Vuelo>>(vueloService.getAll(), HttpStatus.OK);
 	}
@@ -48,4 +48,15 @@ public class VueloController {
 	public ResponseEntity<Vuelo> getById(@PathVariable("id") int id) {
 		return new ResponseEntity<Vuelo>(vueloService.getById(id), HttpStatus.OK);
 	}
+	
+	@GetMapping("/vuelos/terminal/{id_terminal}")
+	public ResponseEntity<List<Vuelo>> getVuelosByTerminal(@PathVariable("id_terminal") int id_terminal) {
+		return new ResponseEntity<List<Vuelo>>(vueloService.getByTerminal(id_terminal), HttpStatus.OK);
+	}
+	
+	@GetMapping("/vuelos/compania/{compania}")
+	public ResponseEntity<List<Vuelo>> getVuelosByCompania(@PathVariable("compania") String compania) {
+		return new ResponseEntity<List<Vuelo>>(vueloService.getByCompania(compania), HttpStatus.OK);
+	}
+	
 }
