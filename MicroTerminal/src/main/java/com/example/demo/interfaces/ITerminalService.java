@@ -14,5 +14,5 @@ public interface ITerminalService {
 
 	public String editarTerminal(TerminalDto t);
 
-	public String deleteById(Integer id);
+	public String deleteById(int id);
 }

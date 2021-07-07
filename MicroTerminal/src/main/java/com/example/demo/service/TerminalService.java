@@ -60,7 +60,7 @@ public class TerminalService implements ITerminalService {
 	}
 
 	@Override
-	public String deleteById(Integer id) {
+	public String deleteById(int id) {
 		Terminal t = terminalRepository.findById(id).orElse(null);
 		if (t == null) {
 			return "error";

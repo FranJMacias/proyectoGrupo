@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import es.bligor.mc.entity.Pasajero;
 import es.bligor.mc.entity.Terminal;
 import es.bligor.mc.service.implem.ICrudService;
 
@@ -17,31 +19,38 @@ public class TerminalService implements ICrudService<Terminal> {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	private String url = "http://localhost:8082/terminal";
+	private String url = "http://micro-terminal/terminal";
+
+	private HttpHeaders headers = new HttpHeaders();
 
 	@Override
 	public Terminal add(Terminal terminal) {
-		return restTemplate.postForObject(url, terminal, Terminal.class);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<Terminal> request = new HttpEntity<>(terminal, headers);
+		return restTemplate.postForObject(url + "/crearTerminal", request, Terminal.class);
 	}
 
 	@Override
 	public void update(Terminal terminal) {
-		restTemplate.put(url, terminal);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<Terminal> request = new HttpEntity<>(terminal, headers);
+		restTemplate.put(url + "/editarTerminal", request);
 	}
 
 	@Override
 	public void delete(String id) {
-		restTemplate.delete(url + "/" + id);
+		int idInt = Integer.valueOf(id);
+		restTemplate.delete(url + "/borrarTerminal/{id}", idInt);
 	}
 
 	@Override
 	public List<Terminal> getAll() {
-		return Arrays.asList(restTemplate.getForObject(url, Terminal[].class));
+		return Arrays.asList(restTemplate.getForObject(url + "/findAll", Terminal[].class));
 	}
 
 	@Override
 	public Terminal getById(String id) {
-		return restTemplate.getForObject(url + "/" + id, Terminal.class);
+		return restTemplate.getForObject(url + "/findById/{id}", Terminal.class, id);
 	}
 
 }

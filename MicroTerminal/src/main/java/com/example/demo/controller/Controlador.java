@@ -55,7 +55,7 @@ public class Controlador {
 	}
 
 	@DeleteMapping("/borrarTerminal/{id}")
-	public ResponseEntity<String> borrarTerminal(@PathVariable("id") Integer id) {
+	public ResponseEntity<String> borrarTerminal(@PathVariable("id") int id) {
 		String resultado = terminalService.deleteById(id);
 		if (resultado.equals("ok")) {
 			return new ResponseEntity<String>("Borrado correctamente", HttpStatus.OK);
