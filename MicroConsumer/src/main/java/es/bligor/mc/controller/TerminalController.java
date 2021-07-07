@@ -54,4 +54,16 @@ public class TerminalController implements ICrudController<Terminal> {
 	public ResponseEntity<Terminal> getById(@PathVariable("id") String id) {
 		return new ResponseEntity<Terminal>(terminalService.getById(id), HttpStatus.OK);
 	}
+
+	@GetMapping("/terminal/filtroNombre/{nombre}")
+	public ResponseEntity<List<Terminal>> getByNombre(@PathVariable("nombre") String nombre) {
+		return new ResponseEntity<List<Terminal>>(terminalService.getByNombre(nombre), HttpStatus.OK);
+	}
+
+	@GetMapping("/terminal/filtroPuertas/{minPuertas}/{maxPuertas}")
+	public ResponseEntity<List<Terminal>> getByPuertas(@PathVariable("minPuertas") Integer minPuertas,
+			@PathVariable("maxPuertas") Integer maxPuertas) {
+		return new ResponseEntity<List<Terminal>>(terminalService.getByPuertas(minPuertas, maxPuertas), HttpStatus.OK);
+	}
+
 }

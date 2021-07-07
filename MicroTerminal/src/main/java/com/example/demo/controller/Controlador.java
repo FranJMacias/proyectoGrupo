@@ -55,12 +55,24 @@ public class Controlador {
 	}
 
 	@DeleteMapping("/borrarTerminal/{id}")
-	public ResponseEntity<String> borrarTerminal(@PathVariable("id") Integer id) {
+	public ResponseEntity<String> borrarTerminal(@PathVariable("id") int id) {
 		String resultado = terminalService.deleteById(id);
 		if (resultado.equals("ok")) {
 			return new ResponseEntity<String>("Borrado correctamente", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("No existe", HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@GetMapping("/filtroNombre/{nombre}")
+	public ResponseEntity<List<TerminalDto>> findByNombre(@PathVariable("nombre") String nombre) {
+		return new ResponseEntity<List<TerminalDto>>(terminalService.findByNombre(nombre), HttpStatus.OK);
+	}
+
+	@GetMapping("/filtroPuertas/{minPuertas}/{maxPuertas}")
+	public ResponseEntity<List<TerminalDto>> findByPuertas(@PathVariable("minPuertas") Integer minPuertas,
+			@PathVariable("maxPuertas") Integer maxPuertas) {
+		return new ResponseEntity<List<TerminalDto>>(terminalService.findByNumeroPuertas(minPuertas, maxPuertas),
+				HttpStatus.OK);
 	}
 }

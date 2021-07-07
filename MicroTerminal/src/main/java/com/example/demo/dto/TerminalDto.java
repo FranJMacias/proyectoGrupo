@@ -15,6 +15,5 @@ public class TerminalDto {
 	private String nombre;
 	private Integer numeroPuertas;
 	private List<ObjetoPerdidoDto> objetosPerdidos;
-	
-	
+
 }

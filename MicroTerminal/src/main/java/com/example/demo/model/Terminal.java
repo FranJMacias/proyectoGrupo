@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -13,15 +14,17 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Terminal {
+public class Terminal implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private Integer idTerminal;
-	
+
 	private String nombre;
-	
+
 	private Integer numeroPuertas;
-	
-	private List<ObjetoPerdido> objetosPerdidos;	
-	
+
+	private List<ObjetoPerdido> objetosPerdidos;
+
 }

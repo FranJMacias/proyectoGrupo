@@ -1,7 +1,7 @@
 package es.bligor.mc.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -12,12 +12,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonRootName("Terminal")
-public class Terminal implements Serializable {
+@JsonRootName("ObjetoPerdido")
+public class ObjetoPerdido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Integer idTerminal;
+	private Integer idObjeto;
+	private Date fecha;
 	private String nombre;
-	private Integer numeroPuertas;
-	private List<ObjetoPerdido> objetosPerdidos;
 }
