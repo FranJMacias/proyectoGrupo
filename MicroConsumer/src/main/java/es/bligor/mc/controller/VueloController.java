@@ -59,4 +59,14 @@ public class VueloController {
 		return new ResponseEntity<List<Vuelo>>(vueloService.getByCompania(compania), HttpStatus.OK);
 	}
 	
+	@GetMapping("/vuelos/origen/{origen}")
+	public ResponseEntity<List<Vuelo>> getVuelosByOrigen(@PathVariable("origen") String origen) {
+		return new ResponseEntity<List<Vuelo>>(vueloService.getByOrigen(origen), HttpStatus.OK);
+	}
+	
+	@GetMapping("/vuelos/destino/{destino}")
+	public ResponseEntity<List<Vuelo>> getVuelosByDestino(@PathVariable("destino") String destino) {
+		return new ResponseEntity<List<Vuelo>>(vueloService.getByDestino(destino), HttpStatus.OK);
+	}
+	
 }

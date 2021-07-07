@@ -54,5 +54,13 @@ public class VueloService {
 	public List<Vuelo> getByCompania(String compania) {
 		return Arrays.asList(restTemplate.getForObject(url + "/vuelos/compania/" + compania, Vuelo[].class));
 	}
+	
+	public List<Vuelo> getByOrigen(String origen) {
+		return Arrays.asList(restTemplate.getForObject(url + "/vuelos/origen/" + origen, Vuelo[].class));
+	}
+	
+	public List<Vuelo> getByDestino(String destino) {
+		return Arrays.asList(restTemplate.getForObject(url + "/vuelos/destino/" + destino, Vuelo[].class));
+	}
 
 }
