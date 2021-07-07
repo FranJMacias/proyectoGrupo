@@ -25,17 +25,12 @@ public class PasajeroService implements IPasajero {
 
 	@Override
 	public Pasajero_DTO findPasajeroById(int id) {
-		return new Pasajero_DTO(pasajeroRepository.findById(id).orElse(null));
+		return converter.convertirModel_Dto((pasajeroRepository.findById(id).orElse(null)));
 	}
 
 	@Override
 	public Pasajero_DTO savePasajero(Pasajero_DTO pasajero_dto) {
-		return new Pasajero_DTO(pasajeroRepository.save(converter.convertirDto_Model(pasajero_dto)));
-	}
-
-	@Override
-	public Pasajero_DTO updatePasajero(Pasajero_DTO pasajero_dto) {
-		return new Pasajero_DTO(pasajeroRepository.save(converter.convertirDto_Model(pasajero_dto)));
+		return converter.convertirModel_Dto((pasajeroRepository.save(converter.convertirDto_Model(pasajero_dto))));
 	}
 
 	@Override

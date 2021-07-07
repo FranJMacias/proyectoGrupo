@@ -33,4 +33,14 @@ public class Pasajero_DTO implements Serializable {
 		this.email = pasajero.getEmail();
 
 	}
+
+	public Pasajero_DTO(int id_vuelo, String nif, String nombre, int telefono, String email) {
+		this.id_vuelo = id_vuelo;
+		this.nif = nif;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.email = email;
+	}
+	
+	
 }

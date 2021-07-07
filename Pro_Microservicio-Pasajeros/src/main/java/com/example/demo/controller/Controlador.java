@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,28 +25,37 @@ public class Controlador {
 	IPasajero ipasajeros;
 
 	@GetMapping("/listar_pasajeros")
-	public List<Pasajero_DTO> get_listar_pasajeros() {
-		return ipasajeros.getAllPasajeros();
+	public ResponseEntity<List<Pasajero_DTO>> get_listar_pasajeros() {
+		return new ResponseEntity<List<Pasajero_DTO>>(ipasajeros.getAllPasajeros(), HttpStatus.OK);
 	}
 
 	@GetMapping("/obtener_pasajero/{id}")
-	public Pasajero_DTO get_cita(@PathVariable("id") int id) {
-		return ipasajeros.findPasajeroById(id);
+	public ResponseEntity<Pasajero_DTO> get_pasajero(@PathVariable("id") int id) {
+		return new ResponseEntity<Pasajero_DTO>(ipasajeros.findPasajeroById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("/crear_pasajero")
-	public Pasajero_DTO get_crear_pasajero(@RequestBody Pasajero_DTO pasajero_DTO) {
-		return ipasajeros.savePasajero(pasajero_DTO);
+	public ResponseEntity<Pasajero_DTO> get_crear_pasajero(@RequestBody Pasajero_DTO pasajero_DTO) {
+		if (ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero()) == null) {
+			return new ResponseEntity<Pasajero_DTO>(ipasajeros.savePasajero(pasajero_DTO), HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<Pasajero_DTO>(new Pasajero_DTO(), HttpStatus.FOUND);
+		}
 	}
 
 	@PutMapping("/actualizar_pasajero")
-	public Pasajero_DTO get_actualizar_pasajero(@RequestBody Pasajero_DTO pasajero_DTO) {
-		return ipasajeros.updatePasajero(pasajero_DTO);
+	public ResponseEntity<Pasajero_DTO> get_actualizar_pasajero(@RequestBody Pasajero_DTO pasajero_DTO) {
+		if (ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero()) == null) {
+			return new ResponseEntity<Pasajero_DTO>(ipasajeros.savePasajero(pasajero_DTO), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Pasajero_DTO>(new Pasajero_DTO(), HttpStatus.FOUND);
+		}
 	}
 
 	@DeleteMapping("/delete_pasajero/{id}")
-	public void get_eliminar_pasajero(@PathVariable("id") int id) {
+	public ResponseEntity get_eliminar_pasajero(@PathVariable("id") int id) {
 		ipasajeros.deletePasajero(id);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
 }

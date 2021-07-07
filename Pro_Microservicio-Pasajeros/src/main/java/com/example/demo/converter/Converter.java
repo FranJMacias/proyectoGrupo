@@ -27,4 +27,15 @@ public class Converter {
 		return pasajero;
 	}
 
+	public Pasajero_DTO convertirModel_Dto(Pasajero pasajero) {
+		Pasajero_DTO pasajero_DTO = new Pasajero_DTO();
+		pasajero_DTO.setId_pasajero(pasajero.getId_pasajero());
+		pasajero_DTO.setId_vuelo(pasajero.getId_vuelo());
+		pasajero_DTO.setNombre(pasajero.getNombre());
+		pasajero_DTO.setNif(pasajero.getNif());
+		pasajero_DTO.setTelefono(pasajero.getTelefono());
+		pasajero_DTO.setEmail(pasajero.getEmail());
+
+		return pasajero_DTO;
+	}
 }

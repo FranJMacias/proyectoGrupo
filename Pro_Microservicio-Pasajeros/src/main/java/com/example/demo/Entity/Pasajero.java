@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.demo.model.Pasajero_DTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,11 +16,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "pasajero")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 public class Pasajero {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pasajero")
 	private int id_pasajero;
 	@Column(name = "id_vuelo")
@@ -31,4 +33,25 @@ public class Pasajero {
 	private int telefono;
 	@Column(name = "email")
 	private String email;
+	
+	
+	public Pasajero(Pasajero_DTO pasajero) {
+		this.id_pasajero = pasajero.getId_pasajero();
+		this.id_vuelo = pasajero.getId_vuelo();
+		this.nombre = pasajero.getNombre();
+		this.nif = pasajero.getNif();
+		this.telefono = pasajero.getTelefono();
+		this.email = pasajero.getEmail();
+
+	}
+	
+	public Pasajero(int id_pasajero, String nif, String nombre, int telefono, String email) {
+		this.id_pasajero = id_pasajero;
+		this.nif = nif;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.email = email;
+	}
+	
+
 }
