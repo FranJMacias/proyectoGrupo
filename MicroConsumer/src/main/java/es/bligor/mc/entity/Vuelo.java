@@ -11,11 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-<<<<<<< HEAD
-@JsonRootName("Vuelo")
-=======
 @JsonRootName("Vuelo_DTO")
->>>>>>> feat-vuelos-David
 public class Vuelo {
 	
 	private Integer id_vuelo;
