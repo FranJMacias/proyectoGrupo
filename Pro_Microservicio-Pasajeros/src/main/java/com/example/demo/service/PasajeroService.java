@@ -30,11 +30,16 @@ public class PasajeroService implements IPasajero {
 
 	@Override
 	public Pasajero_DTO savePasajero(Pasajero_DTO pasajero_dto) {
-		return converter.convertirModel_Dto((pasajeroRepository.save(converter.convertirDto_Model(pasajero_dto))));
+		return converter.convertirModel_Dto(pasajeroRepository.save(converter.convertirDto_Model(pasajero_dto)));
 	}
 
 	@Override
 	public void deletePasajero(int id) {
 		pasajeroRepository.deleteById(id);
+	}
+	
+	@Override
+	public Pasajero_DTO findPasajeroByNif(String nif) {
+		return converter.convertirModel_Dto(pasajeroRepository.findAll().stream().filter(v->v.getNif().equals(nif)).findAny().get());
 	}
 }

@@ -35,13 +35,13 @@ public class Pasajero {
 	private String email;
 	
 	
-	public Pasajero(Pasajero_DTO pasajero) {
-		this.id_pasajero = pasajero.getId_pasajero();
-		this.id_vuelo = pasajero.getId_vuelo();
-		this.nombre = pasajero.getNombre();
-		this.nif = pasajero.getNif();
-		this.telefono = pasajero.getTelefono();
-		this.email = pasajero.getEmail();
+	public Pasajero(Pasajero_DTO pasajero_DTO) {
+		this.id_pasajero = pasajero_DTO.getId_pasajero();
+		this.id_vuelo = pasajero_DTO.getId_vuelo();
+		this.nombre = pasajero_DTO.getNombre();
+		this.nif = pasajero_DTO.getNif();
+		this.telefono = pasajero_DTO.getTelefono();
+		this.email = pasajero_DTO.getEmail();
 
 	}
 	

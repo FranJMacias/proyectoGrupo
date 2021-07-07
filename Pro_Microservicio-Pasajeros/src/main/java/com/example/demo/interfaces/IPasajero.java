@@ -13,4 +13,6 @@ public interface IPasajero {
 	public Pasajero_DTO savePasajero(Pasajero_DTO pasajero_dto);
 
 	public void deletePasajero(int id);
+
+	public Pasajero_DTO findPasajeroByNif(String nif);
 }

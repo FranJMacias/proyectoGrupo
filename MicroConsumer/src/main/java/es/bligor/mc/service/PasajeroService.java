@@ -4,43 +4,48 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import es.bligor.mc.entity.Pasajero;
-import es.bligor.mc.service.implem.ICrudService;
 
 @Service
-public class PasajeroService implements ICrudService<Pasajero> {
+public class PasajeroService {
 
 	@Autowired
 	private RestTemplate restTemplate;
 
-	private String url = "http://localhost:8081/pasajero";
+	private String url = "http://micro-productor-pasajeros";
+	private HttpHeaders headers = new HttpHeaders();
 
-	@Override
 	public Pasajero add(Pasajero pasajero) {
-		return restTemplate.postForObject(url, pasajero, Pasajero.class);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<Pasajero> request = new HttpEntity<>(pasajero, headers);
+		return restTemplate.postForObject(url + "/api/crear_pasajero", request, Pasajero.class);
 	}
 
-	@Override
 	public void update(Pasajero pasajero) {
-		restTemplate.put(url, pasajero);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<Pasajero> request = new HttpEntity<>(pasajero, headers);
+		restTemplate.put(url + "/api/actualizar_pasajero", request);
 	}
 
-	@Override
 	public void delete(String id) {
-		restTemplate.delete(url + "/" + id);
+		restTemplate.delete(url + "/api/delete_pasajero/" + id);
 	}
 
-	@Override
 	public List<Pasajero> getAll() {
-		return Arrays.asList(restTemplate.getForObject(url, Pasajero[].class));
+		return Arrays.asList(restTemplate.getForObject(url + "/api/listar_pasajeros", Pasajero[].class));
 	}
 
-	@Override
 	public Pasajero getById(String id) {
-		return restTemplate.getForObject(url + "/" + id, Pasajero.class);
+		return restTemplate.getForObject(url + "/api/obtener_pasajero/" + id, Pasajero.class);
 	}
 
+	public Pasajero getByNif(String nif) {
+		return restTemplate.getForObject(url + "/api/obtener_pasajero_nif/" + nif, Pasajero.class);
+	}
 }
