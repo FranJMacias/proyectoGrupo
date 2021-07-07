@@ -45,8 +45,8 @@ public class Pasajero {
 
 	}
 	
-	public Pasajero(int id_pasajero, String nif, String nombre, int telefono, String email) {
-		this.id_pasajero = id_pasajero;
+	public Pasajero(int id_vuelo, String nif, String nombre, int telefono, String email) {
+		this.id_vuelo = id_vuelo;
 		this.nif = nif;
 		this.nombre = nombre;
 		this.telefono = telefono;
