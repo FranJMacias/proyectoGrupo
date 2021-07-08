@@ -1,0 +1,70 @@
+<div class="filters container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <input type="text" #nif placeholder="Nif">
+      <button class="col-3" (click)="filterNif()" mat-button>Search</button>
+    </div>
+    <div class="col-2">
+      <button (click)="getPasajeros()" mat-button>Clean</button>
+    </div>
+  </div>
+</div>
+
+<table mat-table [dataSource]="pasajeros" class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.id_pasajero}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="idVuelo">
+    <th mat-header-cell *matHeaderCellDef> Id Vuelo </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.id_vuelo}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.nombre}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="nif">
+    <th mat-header-cell *matHeaderCellDef> Nif </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.nif}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="telefono">
+    <th mat-header-cell *matHeaderCellDef> Telefono </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.telefono}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let pasajero"> {{pasajero.email}} </td>
+  </ng-container>
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="add">
+    <th mat-header-cell *matHeaderCellDef>
+      <button type="button" class="btn btn-primary" routerLink="/home/pasajero/form"> + </button>
+    </th>
+    <td mat-cell *matCellDef="let pasajero">
+      <button type="button" class="btn btn-primary" (click)="edit(pasajero)"> Edit </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>
+    </th>
+    <td mat-cell *matCellDef="let pasajero">
+      <button type="button" class="btn btn-danger" (click)="delete(pasajero.id_pasajero)"> Delete </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

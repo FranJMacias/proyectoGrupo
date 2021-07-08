@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Vuelo</label>
+    <mat-form-field appearance="fill">
+      <mat-label>Vuelo</mat-label>
+      <mat-select [formControl]="form">
+        <mat-option *ngFor="let vuelo of vuelos" [value]="vuelo.id_vuelo">
+          {{vuelo.destino}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre" [(ngModel)]="pasajeroFinal.nombre">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Nif</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nif" [(ngModel)]="pasajeroFinal.nif">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Telefono</label>
+    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Telefono" [(ngModel)]="pasajeroFinal.telefono">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="email" [(ngModel)]="pasajeroFinal.email">
+  </div>
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+  </div>
+</div>

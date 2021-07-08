@@ -1,0 +1,58 @@
+<div class="filters container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <input type="text" #nombreTerminal placeholder="Nombre">
+      <button class="col-3" (click)="filterNombre()" mat-button>Search</button>
+    </div>
+    <div class="col-8">
+      <input class="col-3" type="number" #minP placeholder="Min Puertas">
+      <input class="col-3" type="number" #maxP placeholder="Max Puertas">
+      <button class="col-1" (click)="filterPuertas()" mat-button>Search</button>
+    </div>
+    <div class="col-2">
+      <button (click)="getTerminales()" mat-button>Clean</button>
+    </div>
+  </div>
+</div>
+
+<table mat-table [dataSource]="terminales" class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let terminal"> {{terminal.idTerminal}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let terminal"> {{terminal.nombre}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="nPuertas">
+    <th mat-header-cell *matHeaderCellDef> Numero Puertas </th>
+    <td mat-cell *matCellDef="let terminal"> {{terminal.numeroPuertas}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="add">
+    <th mat-header-cell *matHeaderCellDef>
+      <button type="button" class="btn btn-primary" routerLink="/home/terminal/form"> + </button>
+    </th>
+    <td mat-cell *matCellDef="let terminal">
+      <button type="button" class="btn btn-primary" (click)="edit(terminal)"> Edit </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>
+    </th>
+    <td mat-cell *matCellDef="let terminal">
+      <button type="button" class="btn btn-danger" (click)="delete(terminal.idTerminal)"> Delete </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
