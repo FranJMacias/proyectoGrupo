@@ -8,14 +8,13 @@ import org.springframework.stereotype.Component;
 import com.example.demo.Entity.Pasajero;
 import com.example.demo.model.Pasajero_DTO;
 
-@Component
 public class Converter {
 
-	public List<Pasajero_DTO> convertirLista(List<Pasajero> pasajeros) {
+	public static List<Pasajero_DTO> convertirLista(List<Pasajero> pasajeros) {
 		return pasajeros.stream().map(Pasajero_DTO::new).collect(Collectors.toList());
 	}
 
-	public Pasajero convertirDto_Model(Pasajero_DTO pasajero_DTO) {
+	public static Pasajero convertirDto_Model(Pasajero_DTO pasajero_DTO) {
 		Pasajero pasajero = new Pasajero();
 		pasajero.setId_pasajero(pasajero_DTO.getId_pasajero());
 		pasajero.setId_vuelo(pasajero_DTO.getId_vuelo());
@@ -27,7 +26,7 @@ public class Converter {
 		return pasajero;
 	}
 
-	public Pasajero_DTO convertirModel_Dto(Pasajero pasajero) {
+	public static Pasajero_DTO convertirModel_Dto(Pasajero pasajero) {
 		Pasajero_DTO pasajero_DTO = new Pasajero_DTO();
 		pasajero_DTO.setId_pasajero(pasajero.getId_pasajero());
 		pasajero_DTO.setId_vuelo(pasajero.getId_vuelo());

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Entity.Pasajero;
 import com.example.demo.interfaces.IPasajero;
 import com.example.demo.model.Pasajero_DTO;
 
@@ -26,45 +27,83 @@ public class Controlador {
 
 	@GetMapping("/listar_pasajeros")
 	public ResponseEntity<List<Pasajero_DTO>> get_listar_pasajeros() {
-		return new ResponseEntity<List<Pasajero_DTO>>(ipasajeros.getAllPasajeros(), HttpStatus.OK);
+
+		try {
+			List<Pasajero_DTO> pasajeros = ipasajeros.getAllPasajeros();
+
+			if (pasajeros.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<>(pasajeros, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping("/obtener_pasajero/{id}")
 	public ResponseEntity<Pasajero_DTO> get_pasajero(@PathVariable("id") int id) {
-		return new ResponseEntity<Pasajero_DTO>(ipasajeros.findPasajeroById(id), HttpStatus.OK);
+		Pasajero_DTO pasajero = ipasajeros.findPasajeroById(id);
+		if (pasajero != null) {
+			return new ResponseEntity<>(pasajero, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@PostMapping("/crear_pasajero")
 	public ResponseEntity<Pasajero_DTO> get_crear_pasajero(@RequestBody Pasajero_DTO pasajero_DTO) {
 		try {
-			ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero());
-			return new ResponseEntity<Pasajero_DTO>( new Pasajero_DTO(), HttpStatus.FOUND);
 
-		} catch (NullPointerException e) {
-			return new ResponseEntity<Pasajero_DTO>(ipasajeros.savePasajero(pasajero_DTO), HttpStatus.CREATED);
+			Pasajero_DTO paDto = ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero());
+			if (paDto == null) {
+				Pasajero_DTO pasajero = ipasajeros
+						.savePasajero(new Pasajero_DTO(pasajero_DTO.getId_vuelo(), pasajero_DTO.getNif(),
+								pasajero_DTO.getNombre(), pasajero_DTO.getTelefono(), pasajero_DTO.getEmail()));
+
+				return new ResponseEntity<>(pasajero, HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	@PutMapping("/actualizar_pasajero")
 	public ResponseEntity<Pasajero_DTO> get_actualizar_pasajero(@RequestBody Pasajero_DTO pasajero_DTO) {
-		try {
-			ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero());
-			return new ResponseEntity<Pasajero_DTO>(ipasajeros.savePasajero(pasajero_DTO), HttpStatus.OK);
 
-		} catch (NullPointerException e) {
-			return new ResponseEntity<Pasajero_DTO>( new Pasajero_DTO(), HttpStatus.NOT_FOUND);
+		Pasajero_DTO paDto = ipasajeros.findPasajeroById(pasajero_DTO.getId_pasajero());
+		if (paDto != null) {
+			paDto.setId_vuelo(pasajero_DTO.getId_vuelo());
+			paDto.setNif(pasajero_DTO.getNif());
+			paDto.setNombre(pasajero_DTO.getNombre());
+			paDto.setTelefono(pasajero_DTO.getTelefono());
+			paDto.setEmail(pasajero_DTO.getEmail());
+			return new ResponseEntity<>(ipasajeros.savePasajero(paDto), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@DeleteMapping("/delete_pasajero/{id}")
 	public ResponseEntity get_eliminar_pasajero(@PathVariable("id") int id) {
-		ipasajeros.deletePasajero(id);
-		return new ResponseEntity(HttpStatus.OK);
+		try {
+			ipasajeros.deletePasajero(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
-	
 	@GetMapping("/obtener_pasajero_nif/{nif}")
 	public ResponseEntity<Pasajero_DTO> getPasajeroByNif(@PathVariable("nif") String nif) {
-		return new ResponseEntity<Pasajero_DTO>(ipasajeros.findPasajeroByNif(nif), HttpStatus.OK);
+
+		Pasajero_DTO pasajero = ipasajeros.findPasajeroByNif(nif);
+		if (pasajero != null) {
+			return new ResponseEntity<>(pasajero, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 }
