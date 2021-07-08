@@ -24,7 +24,7 @@ public class PasajeroService implements IPasajero {
 	}
 
 	@Override
-	public Pasajero_DTO findPasajeroById(int id) throws ConfigDataResourceNotFoundException{
+	public Pasajero_DTO findPasajeroById(int id){
 		try {
 			return Converter.convertirModel_Dto(pasajeroRepository.findById(id).orElse(null));
 		} catch (Exception e) {
@@ -46,14 +46,14 @@ public class PasajeroService implements IPasajero {
 
 	@Override
 	public Pasajero_DTO findPasajeroByNif(String nif) {
-
 		try {
-			Pasajero pasajero = pasajeroRepository.findAll().stream().filter(s -> nif.equals(s.getNif())).findFirst()
-					.get();
+			Pasajero pasajero = pasajeroRepository.findAll().stream().filter(s -> nif.equalsIgnoreCase(s.getNif()))
+					.findFirst().get();
 			return Converter.convertirModel_Dto(pasajero);
 		} catch (Exception e) {
+			// TODO: handle exception
 			return null;
 		}
-
+			
 	}
 }

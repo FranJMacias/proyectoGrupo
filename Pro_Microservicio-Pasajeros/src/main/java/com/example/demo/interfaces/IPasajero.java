@@ -14,5 +14,5 @@ public interface IPasajero {
 
 	public void deletePasajero(int id);
 
-	public Pasajero_DTO findPasajeroByNif(String nif);
+	public Pasajero_DTO findPasajeroByNif(String nif) throws Exception ;
 }

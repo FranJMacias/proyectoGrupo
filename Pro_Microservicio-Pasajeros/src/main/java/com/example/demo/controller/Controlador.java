@@ -43,11 +43,7 @@ public class Controlador {
 	@GetMapping("/obtener_pasajero/{id}")
 	public ResponseEntity<Pasajero_DTO> get_pasajero(@PathVariable("id") int id) {
 		Pasajero_DTO pasajero = ipasajeros.findPasajeroById(id);
-		if (pasajero != null) {
 			return new ResponseEntity<>(pasajero, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
 	}
 
 	@PostMapping("/crear_pasajero")
@@ -97,13 +93,9 @@ public class Controlador {
 	}
 
 	@GetMapping("/obtener_pasajero_nif/{nif}")
-	public ResponseEntity<Pasajero_DTO> getPasajeroByNif(@PathVariable("nif") String nif) {
+	public ResponseEntity<Pasajero_DTO> getPasajeroByNif(@PathVariable("nif") String nif) throws Exception {
 
 		Pasajero_DTO pasajero = ipasajeros.findPasajeroByNif(nif);
-		if (pasajero != null) {
-			return new ResponseEntity<>(pasajero, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		return new ResponseEntity<>(pasajero, HttpStatus.OK);
 	}
 }
