@@ -1,3 +1,15 @@
+<div class="filters container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <input type="text" #nif placeholder="Nif">
+      <button class="col-3" (click)="filterNif()" mat-button>Search</button>
+    </div>
+    <div class="col-2">
+      <button (click)="getPasajeros()" mat-button>Clean</button>
+    </div>
+  </div>
+</div>
+
 <table mat-table [dataSource]="pasajeros" class="mat-elevation-z8">
 
   <!-- Position Column -->

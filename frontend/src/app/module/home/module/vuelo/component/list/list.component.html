@@ -1,5 +1,28 @@
-<table mat-table [dataSource]="vuelos" class="mat-elevation-z8">
+<div class="filters container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <input type="number" #terminal placeholder="terminal">
+      <button class="col-3" (click)="filterTerminal()" mat-button>Search</button>
+    </div>
+    <div class="col-2">
+      <input type="text" #compania placeholder="compania">
+      <button class="col-3" (click)="filterCompania()" mat-button>Search</button>
+    </div>
+    <div class="col-2">
+      <input type="text" #origen placeholder="origen">
+      <button class="col-3" (click)="filterOrigen()" mat-button>Search</button>
+    </div>
+    <div class="col-2">
+      <input type="text" #destino placeholder="destino">
+      <button class="col-3" (click)="filterDestino()" mat-button>Search</button>
+    </div>
+    <div class="col-2">
+      <button (click)="getVuelos()" mat-button>Clean</button>
+    </div>
+  </div>
+</div>
 
+<table mat-table [dataSource]="vuelos" class="mat-elevation-z8">
   <!-- Position Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> Id </th>

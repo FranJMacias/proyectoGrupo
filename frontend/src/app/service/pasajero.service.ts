@@ -28,4 +28,7 @@ export class PasajeroService {
   public getById(id: number): Observable<Pasajero>{
     return this.http.get<Pasajero>(this.url + '/' + id);
   }
+  public filterNif(nif: string): Observable<Pasajero[]>{
+    return this.http.get<Pasajero[]>(this.url + '/nif/' + nif);
+  }
 }

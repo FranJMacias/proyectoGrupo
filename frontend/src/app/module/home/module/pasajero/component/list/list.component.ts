@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pasajero } from 'src/app/model/pasajero';
 import { PasajeroService } from 'src/app/service/pasajero.service';
@@ -10,6 +10,8 @@ import { PasajeroModule } from '../../pasajero.module';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+
+  @ViewChild('nif') nif!: ElementRef;
 
   displayedColumns: string[] = ['id', 'idVuelo', 'nombre', 'nif', 'telefono', 'email', 'add', 'delete'];
   pasajeros: Pasajero[] = [];
@@ -35,5 +37,9 @@ export class ListComponent implements OnInit {
 
   edit(pasajero: Pasajero){
     this.router.navigateByUrl('/home/pasajero/form', { state: pasajero });
+  }
+
+  filterNif(){
+    this.pasajeroService.filterNif(this.nif.nativeElement.value).subscribe(res=> this.pasajeros = res);
   }
 }

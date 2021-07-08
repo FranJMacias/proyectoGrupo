@@ -1,3 +1,20 @@
+<div class="filters container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <input type="text" #nombreTerminal placeholder="Nombre">
+      <button class="col-3" (click)="filterNombre()" mat-button>Search</button>
+    </div>
+    <div class="col-8">
+      <input class="col-3" type="number" #minP placeholder="Min Puertas">
+      <input class="col-3" type="number" #maxP placeholder="Max Puertas">
+      <button class="col-1" (click)="filterPuertas()" mat-button>Search</button>
+    </div>
+    <div class="col-2">
+      <button (click)="getTerminales()" mat-button>Clean</button>
+    </div>
+  </div>
+</div>
+
 <table mat-table [dataSource]="terminales" class="mat-elevation-z8">
 
   <!-- Position Column -->

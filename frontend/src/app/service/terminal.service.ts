@@ -28,4 +28,10 @@ export class TerminalService {
   public getById(id: number): Observable<Terminal> {
     return this.http.get<Terminal>(this.url + '/' + id);
   }
+  public filterNombre(nombre: string): Observable<Terminal[]> {
+    return this.http.get<Terminal[]>(this.url + '/filtroNombre/' + nombre);
+  }
+  public filterPuertas(minPuertas: number, maxPuertas: number): Observable<Terminal[]> {
+    return this.http.get<Terminal[]>(this.url + '/filtroPuertas/' + minPuertas + '/' + maxPuertas);
+  }
 }

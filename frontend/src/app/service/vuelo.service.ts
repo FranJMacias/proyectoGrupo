@@ -28,4 +28,20 @@ export class VueloService {
   public getById(id: number): Observable<Vuelo> {
     return this.http.get<Vuelo>(this.url + '/' + id);
   }
+
+  public filterTerminal(idTerminal: number): Observable<Vuelo[]> {
+    return this.http.get<Vuelo[]>(this.url + 's/terminal/' + idTerminal);
+  }
+
+  public filterCompañia(compania: String): Observable<Vuelo[]> {
+    return this.http.get<Vuelo[]>(this.url + 's/compania/' + compania);
+  }
+
+  public filterOrigen(origen: String): Observable<Vuelo[]> {
+    return this.http.get<Vuelo[]>(this.url + 's/origen/' + origen);
+  }
+
+  public filterDestino(destino: String): Observable<Vuelo[]> {
+    return this.http.get<Vuelo[]>(this.url + 's/destino/' + destino);
+  }
 }
